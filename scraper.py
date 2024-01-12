@@ -8,10 +8,11 @@ def main():
     upvotes = []
     comment_count = []
     links = []
-    # Add your own authenticator here 
-    reddit = praw.Reddit(client_id="",
-                         client_secret="",
-                         user_agent="")
+    pinned_comments = []
+    # Add your own authenticator here
+    reddit = praw.Reddit(client_id="fcrmTadSeQRoEVZysJ5rag",
+                         client_secret="MfCTbvB0CVGGVg5GluOEAGjKPJ96jg",
+                         user_agent="OMEGA-ROLL")
 
     print("Enter 1 to scrape a subreddit or 2 to parse a CSV file of a scrapped search term")
     selection = int(input())
@@ -33,11 +34,18 @@ def main():
                 comment_count.append(submission.num_comments)
                 # Here, produce a link that leads directly to the submission post
                 links.append("https://www.reddit.com" + submission.permalink)
+                submission.comments.replace_more(limit=0)
+                for top_level_comment in submission.comments:
+                    # Save the Top Pinned Comment
+                    if top_level_comment.stickied:
+                        pinned_comments.append(top_level_comment.body)
+                        break
         # Transform collected Data into a Pandas DataFrame
         df = pd.DataFrame({"Titles": titles,
                            "Upvotes": upvotes,
                            "# of Comments": comment_count,
-                           "Links": links})
+                           "Links": links,
+                           "Pinned Comment: ": pinned_comments})
         # Write to CSV
         df.to_csv("csvs\\" + topic + ".csv", index=False)
     # Parse CSV
