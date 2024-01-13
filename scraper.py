@@ -10,9 +10,9 @@ def main():
     links = []
     pinned_comments = []
     # Add your own authenticator here
-    reddit = praw.Reddit(client_id="fcrmTadSeQRoEVZysJ5rag",
-                         client_secret="MfCTbvB0CVGGVg5GluOEAGjKPJ96jg",
-                         user_agent="OMEGA-ROLL")
+    reddit = praw.Reddit(client_id="",
+                         client_secret="",
+                         user_agent="")
 
     print("Enter 1 to scrape a subreddit or 2 to parse a CSV file of a scrapped search term")
     selection = int(input())
