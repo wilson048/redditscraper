@@ -64,7 +64,7 @@ def main():
 
         print("Enter a number that corresponds to a file name displayed [0 - " + str(num_files - 1) + "]")
         selection = int(input())
-        while selection <= 0 or selection >= num_files:
+        while selection < 0 or selection >= num_files:
             print("Enter a number that corresponds to a file name displayed [0 - " + str(num_files - 1) + "]")
             selection = int(input())
 
